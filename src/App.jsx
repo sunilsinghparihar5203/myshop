@@ -1,52 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import CartItemContainer from './components/CartItemContainer';
+import ProductDetail from './components/ProductDetail';
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
+import { ProductContext } from './context/ProductContext';
 import './App.css';
 import Card from './components/Card';
 
 function App() {
-  const [data, setData] = useState([]);
-  const [cartData, setCartData] = useState([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+}
+
+function AppContent() {
+  const {
+    products,
+    cartItems,
+    isCartOpen,
+    fetchProducts,
+    addToCart,
+    toggleCart,
+    closeCart
+  } = useContext(ProductContext);
 
   useEffect(() => {
-    fetch('https://dummyjson.com/products')
-      .then(res => res.json())
-      .then(data => {
-        console.log(data.products);
-        setData(data.products);
-      });
+    fetchProducts();
   }, []);
 
-  const addCardhandler = (product) => {
-    setCartData([...cartData, product]);
-    console.log("Product added in card")
-  }
-
-  const toggleCart = () => {
-    setIsCartOpen(!isCartOpen);
-  };
-
-  const closeCart = () => {
-    setIsCartOpen(false);
-  };
-
-  console.log(cartData);
   return (
     <>
       <header>
-        <Navigation totalItems={cartData.length} onCartClick={toggleCart} />
+        <Navigation totalItems={cartItems.length} onCartClick={toggleCart} />
       </header>
-      <div className="products-container">
-        {data.length > 0 && data.map((item) => (
-          <Card key={item.id} product={item} addCardhandler={addCardhandler} />
-        ))}
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={
+          <div className="products-container">
+            {products.length > 0 && products.map((item) => (
+              <Card key={item.id} product={item} addCardhandler={addToCart} />
+            ))}
+          </div>
+        } />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
       {isCartOpen && (
-        <CartItemContainer cartItems={cartData} onClose={closeCart} />
+        <CartItemContainer cartItems={cartItems} onClose={closeCart} />
       )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

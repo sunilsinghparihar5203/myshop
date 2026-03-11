@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ProductContext } from '../context/ProductContext';
 import './CartItemContainer.css';
 
-function CartItemContainer({ cartItems, onClose }) {
-  const totalAmount = cartItems.reduce((total, item) => total + item.price, 0);
+function CartItemContainer({ onClose }) {
+  const { cartItems, getTotalAmount, removeFromCart } = useContext(ProductContext);
+  const totalAmount = getTotalAmount();
 
   return (
     <div className="cart-overlay">
@@ -17,13 +19,17 @@ function CartItemContainer({ cartItems, onClose }) {
           ) : (
             cartItems.map((item) => (
               <div key={item.id} className="cart-item">
-                <div className="cart-item-image">
-                  <img src={item.thumbnail} alt={item.title} />
-                </div>
+                <img src={item.thumbnail} alt={item.title} className="cart-item-image" />
                 <div className="cart-item-details">
                   <h4>{item.title}</h4>
-                  <p className="cart-item-price">${item.price}</p>
+                  <p className="cart-item-price">₹{item.price}</p>
                 </div>
+                <button
+                  className="remove-btn"
+                  onClick={() => removeFromCart(item.id)}
+                >
+                  ×
+                </button>
               </div>
             ))
           )}
@@ -32,7 +38,7 @@ function CartItemContainer({ cartItems, onClose }) {
           <div className="cart-footer">
             <div className="cart-total">
               <span className="total-label">Total:</span>
-              <span className="total-amount">${totalAmount.toFixed(2)}</span>
+              <span className="total-amount">₹{totalAmount.toFixed(2)}</span>
             </div>
             <button className="checkout-btn">Proceed to Checkout</button>
           </div>

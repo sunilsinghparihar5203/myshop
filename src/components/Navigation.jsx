@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Navigation.css';
 
 const Navigation = ({ totalItems, onCartClick }) => {
@@ -21,10 +22,10 @@ const Navigation = ({ totalItems, onCartClick }) => {
       </div>
 
       <ul className={`nav-list ${isMenuOpen ? 'active' : ''}`}>
-        <li><a href="#home" className="nav-link" onClick={toggleMenu}>Home</a></li>
-        <li><a href="#product" className="nav-link" onClick={toggleMenu}>Product</a></li>
-        <li><a href="#about" className="nav-link" onClick={toggleMenu}>About</a></li>
-        <li><a href="#contact" className="nav-link" onClick={toggleMenu}>Contact</a></li>
+        <li><Link to="/" className="nav-link" onClick={toggleMenu}>Home</Link></li>
+        <li><Link to="/products" className="nav-link" onClick={toggleMenu}>Product</Link></li>
+        <li><Link to="/about" className="nav-link" onClick={toggleMenu}>About</Link></li>
+        <li><Link to="/contact" className="nav-link" onClick={toggleMenu}>Contact</Link></li>
       </ul>
 
       <div className="nav-cart">

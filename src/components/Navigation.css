@@ -71,6 +71,63 @@
   font-weight: bold;
 }
 
+/* Navigation actions container */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* User authentication styles */
+.nav-auth .login-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-auth .login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* User info and logout styles */
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-email {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.logout-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #c82333;
+  transform: translateY(-1px);
+}
+
 /* Hamburger menu */
 .menu-toggle {
   display: none;
@@ -158,6 +215,13 @@
     z-index: 1000;
   }
   
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 1000;
+  }
+  
   .cart-icon {
     font-size: 1.3rem;
   }
@@ -166,6 +230,27 @@
     width: 18px;
     height: 18px;
     font-size: 0.7rem;
+  }
+  
+  .nav-auth .login-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .nav-user {
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: flex-end;
+  }
+  
+  .user-email {
+    font-size: 0.8rem;
+    max-width: 120px;
+  }
+  
+  .logout-btn {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
   }
   
   /* Hamburger animation */

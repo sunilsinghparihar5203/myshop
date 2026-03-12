@@ -18,7 +18,7 @@ function CartItemContainer({ onClose }) {
             <p className="empty-cart">Your cart is empty</p>
           ) : (
             cartItems.map((item) => (
-              <div key={item.id} className="cart-item">
+              <div key={item.cartItemId} className="cart-item">
                 <img src={item.thumbnail} alt={item.title} className="cart-item-image" />
                 <div className="cart-item-details">
                   <h4>{item.title}</h4>
@@ -26,7 +26,7 @@ function CartItemContainer({ onClose }) {
                 </div>
                 <button
                   className="remove-btn"
-                  onClick={() => removeFromCart(item.id)}
+                  onClick={() => removeFromCart(item.cartItemId)}
                 >
                   ×
                 </button>

@@ -22,13 +22,18 @@ export const ProductProvider = ({ children }) => {
 
   // Add product to cart
   const addToCart = (product) => {
-    setCartItems(prev => [...prev, product]);
-    console.log('Product added to cart:', product);
+    const cartItem = {
+      ...product,
+      cartItemId: Date.now() + Math.random(), // Generate unique ID for this cart entry
+      quantity: 1
+    };
+    setCartItems(prev => [...prev, cartItem]);
+    console.log('Product added to cart:', cartItem);
   };
 
   // Remove product from cart
-  const removeFromCart = (productId) => {
-    setCartItems(prev => prev.filter(item => item.id !== productId));
+  const removeFromCart = (cartItemId) => {
+    setCartItems(prev => prev.filter(item => item.cartItemId !== cartItemId));
   };
 
   // Toggle cart

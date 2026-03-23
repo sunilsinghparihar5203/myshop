@@ -1,12 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ProductContext } from '../context/ProductContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAllProducts } from '../features/products/productsSlice';
 import Card from './Card';
 import './Home.css';
 
 function Home() {
   const navigate = useNavigate();
-  const { products, addToCart } = useContext(ProductContext);
+  const dispatch = useDispatch();
+  const products = useSelector(selectAllProducts);
 
   return (
     <div className="home">
@@ -24,7 +26,7 @@ function Home() {
         <h2>Featured Products</h2>
         <div className="products-grid">
           {products.slice(0, 6).map((product) => (
-            <Card key={product.id} product={product} addCardhandler={addToCart} />
+            <Card key={product.id} product={product} addCardhandler={(product) => dispatch({ type: 'cart/addToCart', payload: product })} />
           ))}
         </div>
         <button className="view-all-btn" onClick={() => navigate('/products')}>

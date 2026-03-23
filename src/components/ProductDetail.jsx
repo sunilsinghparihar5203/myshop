@@ -1,12 +1,15 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ProductContext } from '../context/ProductContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectAllProducts } from '../features/products/productsSlice';
+import { addToCart } from '../features/cart/cartSlice';
 import './ProductDetail.css';
 
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { products, addToCart } = useContext(ProductContext);
+  const dispatch = useDispatch();
+  const products = useSelector(selectAllProducts);
 
   const product = useMemo(() => {
     return products.find(p => p.id === parseInt(id));
@@ -50,7 +53,7 @@ function ProductDetail() {
           </div>
 
           <button
-            onClick={() => addToCart(product)}
+            onClick={() => dispatch(addToCart(product))}
             className="add-to-cart-detail"
           >
             Add to Cart

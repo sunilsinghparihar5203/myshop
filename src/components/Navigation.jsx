@@ -1,12 +1,16 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { AuthContext } from '../context/AuthContext';
+import { selectCartItems } from '../features/cart/cartSlice';
 import './Navigation.css';
 
-const Navigation = ({ totalItems, onCartClick }) => {
+const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -22,7 +26,7 @@ const Navigation = ({ totalItems, onCartClick }) => {
   return (
     <nav className="navbar">
       <div className="nav-brand">
-        <h2>ToolKit</h2>
+        <h2>MyShop</h2>
       </div>
 
       <div className="menu-toggle" onClick={toggleMenu}>
@@ -43,9 +47,9 @@ const Navigation = ({ totalItems, onCartClick }) => {
           <>
             {/* Show cart icon only when user is logged in */}
             <div className="nav-cart">
-              <div className="cart-icon" onClick={onCartClick}>
+              <div className="cart-icon" onClick={() => dispatch({ type: 'cart/toggleCart' })}>
                 🛒
-                <span className="cart-count">{totalItems}</span>
+                <span className="cart-count">{cartItems.length}</span>
               </div>
             </div>
 

@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
-import { ProductContext } from '../context/ProductContext';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCartItems, selectCartTotal, removeFromCart } from '../features/cart/cartSlice';
 import './CartItemContainer.css';
 
 function CartItemContainer({ onClose }) {
-  const { cartItems, getTotalAmount, removeFromCart } = useContext(ProductContext);
-  const totalAmount = getTotalAmount();
+  const cartItems = useSelector(selectCartItems);
+  const totalAmount = useSelector(selectCartTotal);
+  const dispatch = useDispatch();
 
   return (
     <div className="cart-overlay">
@@ -26,7 +28,7 @@ function CartItemContainer({ onClose }) {
                 </div>
                 <button
                   className="remove-btn"
-                  onClick={() => removeFromCart(item.cartItemId)}
+                  onClick={() => dispatch(removeFromCart(item.cartItemId))}
                 >
                   ×
                 </button>

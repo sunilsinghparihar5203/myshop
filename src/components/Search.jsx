@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchQuery, selectSearchQuery } from '../features/products/productsSlice';
 import './Search.css';
@@ -8,18 +8,10 @@ function Search() {
   const searchQuery = useSelector(selectSearchQuery);
   const [localQuery, setLocalQuery] = useState(searchQuery);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (localQuery !== searchQuery) {
-        dispatch(setSearchQuery(localQuery));
-      }
-    }, 300); // Debounce search
-
-    return () => clearTimeout(timer);
-  }, [localQuery, searchQuery, dispatch]);
-
   const handleInputChange = (e) => {
-    setLocalQuery(e.target.value);
+    const value = e.target.value;
+    setLocalQuery(value);
+    dispatch(setSearchQuery(value));
   };
 
   const handleClear = () => {

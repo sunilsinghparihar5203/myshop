@@ -83,6 +83,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  order: 4;
 }
 
 /* User authentication styles */
@@ -160,10 +161,7 @@
   }
   
   .nav-search {
-    order: 3;
-    flex-basis: 100%;
-    max-width: 100%;
-    margin: 0.5rem 0;
+    display: none; /* Hide search on tablet */
   }
   
   .nav-list {
@@ -189,10 +187,11 @@
   }
   
   .nav-search {
-    order: 3;
-    flex-basis: 100%;
-    max-width: 100%;
-    margin: 0.5rem 0;
+    display: none; /* Hide search on mobile */
+  }
+  
+  .nav-actions {
+    order: 5;
   }
   
   .menu-toggle {

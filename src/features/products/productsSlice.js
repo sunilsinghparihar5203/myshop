@@ -40,13 +40,19 @@ const productsSlice = createSlice({
         state.filteredItems = state.items;
       } else {
         const query = action.payload.toLowerCase();
-        state.filteredItems = state.items.filter(
-          (product) =>
-            product.title.toLowerCase().includes(query) ||
-            product.description.toLowerCase().includes(query) ||
-            product.category.toLowerCase().includes(query) ||
-            product.brand.toLowerCase().includes(query),
-        );
+        state.filteredItems = state.items.filter((product) => {
+          const title = product.title || "";
+          const description = product.description || "";
+          const category = product.category || "";
+          const brand = product.brand || "";
+
+          return (
+            title.toLowerCase().includes(query) ||
+            description.toLowerCase().includes(query) ||
+            category.toLowerCase().includes(query) ||
+            brand.toLowerCase().includes(query)
+          );
+        });
       }
     },
   },

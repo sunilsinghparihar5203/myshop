@@ -30,10 +30,6 @@ const Navigation = () => {
         <h2>MyShop</h2>
       </div>
 
-      <div className="nav-search">
-        <Search />
-      </div>
-
       <div className="menu-toggle" onClick={toggleMenu}>
         <span className="bar"></span>
         <span className="bar"></span>
@@ -48,6 +44,9 @@ const Navigation = () => {
       </ul>
 
       <div className="nav-actions">
+        <div className="nav-search">
+          <Search />
+        </div>
         {authContext.user ? (
           <>
             {/* Show cart icon only when user is logged in */}

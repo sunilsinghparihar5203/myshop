@@ -7,7 +7,7 @@ export const store = configureStore({
     products: productsReducer,
     cart: cartReducer,
   },
+  devTools: true,
 });
 
-export const RootState = store.getState;
-export const AppDispatch = store.dispatch;
+export default store;

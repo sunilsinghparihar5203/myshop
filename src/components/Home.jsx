@@ -1,14 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAllProducts } from '../features/products/productsSlice';
+import { selectFilteredProducts } from '../features/products/productsSlice';
 import Card from './Card';
 import './Home.css';
 
 function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const products = useSelector(selectAllProducts);
+  const products = useSelector(selectFilteredProducts);
 
   return (
     <div className="home">

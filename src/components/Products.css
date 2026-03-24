@@ -12,6 +12,23 @@
   font-weight: 700;
 }
 
+.no-products {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #666;
+}
+
+.no-products h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.no-products p {
+  font-size: 1rem;
+  color: #666;
+}
+
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

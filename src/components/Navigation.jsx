@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthContext } from '../context/AuthContext';
 import { selectCartItems } from '../features/cart/cartSlice';
+import Search from './Search';
 import './Navigation.css';
 
 const Navigation = () => {
@@ -27,6 +28,10 @@ const Navigation = () => {
     <nav className="navbar">
       <div className="nav-brand">
         <h2>MyShop</h2>
+      </div>
+
+      <div className="nav-search">
+        <Search />
       </div>
 
       <div className="menu-toggle" onClick={toggleMenu}>
